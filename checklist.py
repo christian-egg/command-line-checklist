@@ -32,6 +32,9 @@ def create_menu_question(items):
         ]
     )
 
+def create_confirmation_question(message):
+    return questionary.confirm(message, default=False)
+
 class Checklist(cli.Application):
     VERSION = "1.0"
     
