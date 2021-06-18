@@ -16,7 +16,7 @@ def test_get_file_text_file_doesnt_exist():
 
 def test_get_file_text_file_is_empty():
     text = get_file_text("empty_test_list.txt")
-    assert text == None, "Empty test file should return None"
+    assert text == [], "Empty test file should return empty list"
     
 # Tests for get_list_items()
 
