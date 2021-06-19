@@ -1,3 +1,4 @@
+from plumbum.cli.switches import switch
 from pyfiglet import Figlet
 from plumbum import cli
 from plumbum import local
@@ -30,7 +31,7 @@ def create_menu_question(items):
         'type': 'rawselect',
         'name': 'items',
         'message': 'Choose an option below (choosing an item will remove it)',
-        'choices': [{'name': item.strip()} for index, item in enumerate(all_options)],
+        'choices': [{'name': item.strip(), 'value': index} for index, item in enumerate(all_options)],
     }]
 
 def create_confirmation_question(message):
@@ -38,15 +39,40 @@ def create_confirmation_question(message):
 
 class Checklist(cli.Application):
     VERSION = "1.0"
+    NUM_DEFAULT_OPTIONS = 2
+    items = []
 
     def main(self):
         print_banner("CLI Checklist")
         list_text = get_file_text(LIST_FILE_NAME)
-        items = get_list_items(list_text)
+        Checklist.items = get_list_items(list_text)
 
-        question = create_menu_question(items)
+        Checklist.home_menu()
+
+    def home_menu():
+        question = create_menu_question(Checklist.items)
         answer = prompt(question)
-        print(answer)
+        print(answer.get('items'))
+
+        if (answer.get('items') == 0):
+            Checklist.add_item()
+        elif (answer.get('items') == 1):
+            Checklist.clear_list
+        elif (answer.get('items') == 2):
+            return
+        elif (answer.get('items') > 2):
+            Checklist.del_item(answer.get('items') - Checklist.NUM_DEFAULT_OPTIONS)
+
+        
+
+    def add_item():
+        return 1
+
+    def clear_list():
+        return
+
+    def del_item(index):
+        return
 
 if __name__ == "__main__":
     Checklist()
