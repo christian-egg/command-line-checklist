@@ -24,13 +24,13 @@ def get_list_items(list_text):
 
 def create_menu_question(items):
     default_options = ["Add a new item", "Clear list", "Quit"]
-    all_options = items + default_options
+    all_options = default_options + items
 
     return [{
         'type': 'rawselect',
         'name': 'items',
         'message': 'Choose an option below (choosing an item will remove it)',
-        'choices': [{'name': item.strip()} for item in all_options],
+        'choices': [{'name': item.strip()} for index, item in enumerate(all_options)],
     }]
 
 def create_confirmation_question(message):
@@ -46,6 +46,7 @@ class Checklist(cli.Application):
 
         question = create_menu_question(items)
         answer = prompt(question)
+        print(answer)
 
 if __name__ == "__main__":
     Checklist()
