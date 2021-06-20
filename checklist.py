@@ -25,7 +25,7 @@ def get_list_items(list_text):
 
 def write_list_as_text(list):
     text = ""
-    if (len(list) == 0):
+    if (list == []):
         return text
     
     for index, item in enumerate(list):
@@ -102,8 +102,11 @@ class Checklist(cli.Application):
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def edit_file(file_name, new_text):
-        echo = local["echo"]
-        (echo[new_text] > file_name)()
+        list_file = open(LIST_FILE_NAME, "w")
+        list_file.truncate()
+        
+        if (new_text != ""):
+            list_file.write(new_text)
         
 
 if __name__ == "__main__":
