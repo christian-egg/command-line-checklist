@@ -60,7 +60,9 @@ class Checklist(cli.Application):
         list_text = get_file_text(LIST_FILE_NAME)
         Checklist.items = get_list_items(list_text)
 
-        Checklist.home_menu()
+        repeat_menu = True
+        while(repeat_menu):
+            repeat_menu = Checklist.home_menu()
 
     def home_menu():
         question = create_menu_question(Checklist.items)
@@ -72,11 +74,12 @@ class Checklist(cli.Application):
         elif (answer.get('items') == 1):
             Checklist.clear_list
         elif (answer.get('items') == 2):
-            return
+            return False
         elif (answer.get('items') > 2):
             Checklist.del_item(answer.get('items') - Checklist.NUM_DEFAULT_OPTIONS)
 
-        
+        # Return true if the user did not choose to quit
+        return True
 
     def add_item():
         answer = questionary.text("What is the name of the item you want to add?").ask()
@@ -87,7 +90,10 @@ class Checklist(cli.Application):
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def clear_list():
-        return
+        answer = questionary.text("Are you sure you want to clear the list?").ask()
+        if (answer):
+            Checklist.items.clear()
+            Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def del_item(index):
         answer = create_confirmation_question("delete " + Checklist.items[index]).ask()
