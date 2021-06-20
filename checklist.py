@@ -90,7 +90,7 @@ class Checklist(cli.Application):
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def clear_list():
-        answer = questionary.create_confirmation_question("clear the list?").ask()
+        answer = create_confirmation_question("clear the list?").ask()
         if (answer):
             Checklist.items.clear()
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
