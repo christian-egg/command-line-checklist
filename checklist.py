@@ -84,13 +84,16 @@ class Checklist(cli.Application):
             return
         else:
             Checklist.items.append(answer)
-            edit_file()
+            Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def clear_list():
         return
 
     def del_item(index):
-        return
+        answer = create_confirmation_question("delete " + Checklist.items[index]).ask()
+        if (answer):
+            Checklist.items.remove(Checklist.items[index])
+            Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def edit_file(file_name, new_text):
         echo = local["echo"]
