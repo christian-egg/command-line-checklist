@@ -29,9 +29,9 @@ def write_list_as_text(list):
         return text
     
     for index, item in enumerate(list):
-        text.append()
+        text += Checklist.items[index]
         if (index != len(list) - 1):
-            text.append("/n")
+            text += "/n"
 
 
     return text
