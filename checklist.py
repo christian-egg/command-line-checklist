@@ -23,6 +23,19 @@ def get_list_items(list_text):
     
     return items
 
+def write_list_as_text(list):
+    text = ""
+    if (len(list) == 0):
+        return text
+    
+    for index, item in enumerate(list):
+        text.append()
+        if (index != len(list) - 1):
+            text.append("/n")
+
+
+    return text
+
 def create_menu_question(items):
     default_options = ["Add a new item", "Clear list", "Quit"]
     all_options = default_options + items
@@ -34,8 +47,8 @@ def create_menu_question(items):
         'choices': [{'name': item.strip(), 'value': index} for index, item in enumerate(all_options)],
     }]
 
-def create_confirmation_question(message):
-    return questionary.confirm(message, default=False)
+def create_confirmation_question(action):
+    return questionary.confirm("Are you sure you want to " + action + "?", default=False)
 
 class Checklist(cli.Application):
     VERSION = "1.0"
@@ -66,13 +79,22 @@ class Checklist(cli.Application):
         
 
     def add_item():
-        return 1
+        answer = questionary.text("What is the name of the item you want to add?").ask()
+        if (answer == ""):
+            return
+        else:
+            Checklist.items.append(answer)
+            edit_file()
 
     def clear_list():
         return
 
     def del_item(index):
         return
+
+    def edit_file(file_name, new_text):
+        echo = local["echo"]
+        echo(new_text, ">", file_name)
 
 if __name__ == "__main__":
     Checklist()
