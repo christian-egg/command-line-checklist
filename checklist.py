@@ -52,7 +52,7 @@ def create_confirmation_question(action):
 
 class Checklist(cli.Application):
     VERSION = "1.0"
-    NUM_DEFAULT_OPTIONS = 2
+    NUM_DEFAULT_OPTIONS = 3
     items = []
 
     def main(self):
@@ -103,7 +103,8 @@ class Checklist(cli.Application):
 
     def edit_file(file_name, new_text):
         echo = local["echo"]
-        echo(new_text, ">", file_name)
+        (echo[new_text] > file_name)()
+        
 
 if __name__ == "__main__":
     Checklist()
