@@ -72,7 +72,7 @@ class Checklist(cli.Application):
         if (answer.get('items') == 0):
             Checklist.add_item()
         elif (answer.get('items') == 1):
-            Checklist.clear_list
+            Checklist.clear_list()
         elif (answer.get('items') == 2):
             return False
         elif (answer.get('items') > 2):
@@ -90,7 +90,7 @@ class Checklist(cli.Application):
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
 
     def clear_list():
-        answer = questionary.text("Are you sure you want to clear the list?").ask()
+        answer = questionary.create_confirmation_question("clear the list?").ask()
         if (answer):
             Checklist.items.clear()
             Checklist.edit_file(LIST_FILE_NAME, write_list_as_text(Checklist.items))
