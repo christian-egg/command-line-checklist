@@ -19,7 +19,7 @@ def get_list_items(list_text):
         return []
     
     list = list_text.strip()
-    items = list.split("\n")
+    items = list.split("/n")
     
     return items
 
