@@ -24,8 +24,8 @@ checklist.py like so (if you have python3, simply change python to python3):
 </p>
 
 # How to use
-<p> When running the program for the first time, you should see 3 options like so: </p>
-![Standard home menu. You should see this the first time you run the program](https://user-images.githubusercontent.com/85647626/122694910-8bacec80-d204-11eb-9515-98bf87404449.png)
+![Standard home menu. You should see this the first time you run the program](https://user-images.githubusercontent.com/85647626/122694950-a5e6ca80-d204-11eb-9349-a2b2c42a3248.png)
+<p> When running the program for the first time, you should see the 3 options above. </p>
 
 <p> The 3 options you see are NOT items in the checklist, but default options that can be used to modify the list. <br>
 To select options, press the number key corresponding to its position in the list of choices. To choose the option, press the enter key.
