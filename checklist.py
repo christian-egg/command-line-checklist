@@ -107,6 +107,7 @@ class Checklist(cli.Application):
         
         if (new_text != ""):
             list_file.write(new_text)
+        list_file.close()
         
 
 if __name__ == "__main__":
